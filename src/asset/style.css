@@ -1,0 +1,100 @@
+#components-layout-demo-side .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+}
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    height: 470px;
+    margin-top: 110px;
+    border: 1px solid black;
+}
+.box{
+    margin-top: 110px;
+    height: 470px;
+}
+.card-area-admin{
+    height: 90vh;
+    overflow: hidden;
+    height: 100%;
+}
+.cardLeft{
+    /* margin-left: 100px; */
+    background-color: #f2f2f2;
+    height: 100%;
+    border-radius: 5px 0px 0px 5px;
+}
+.cardRight{
+    background-color:blue;
+    height: 100%;
+    border-radius: 0px 5px 5px 0px;
+}
+.imgLogin{
+    height: 250px;
+    margin: 136px 0px 20px 40px; 
+}
+.txtboxNim{
+    margin-top:160px;
+    padding: 10px;
+    width: 100%;
+}
+.txtboxPassword{
+    padding: 10px;
+}
+.cardLogin{
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-box-shadow: 1px 16px 19px 10px rgba(133,133,133,0.31);
+    -moz-box-shadow: 1px 16px 19px 10px rgba(133,133,133,0.31);
+    box-shadow: 1px 16px 19px 10px rgba(133,133,133,0.31);
+}
+.txtJudul{
+    margin-top:100px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 23px;
+    text-align: left;
+    margin-left: 36px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+.formLogin{
+    padding: 20px;
+}
+.txtNIM{
+    height: 45px;
+}
+.txtPassword{
+    height: 45px;
+}
+.btnLogin{
+    margin-top: 50px;
+    /* height: 45px; */
+    text-align: left;
+}
+.btnBukuTamu{
+    margin-top: 10px;
+    height: 45px;
+    text-align: left;
+}
+@media (max-width: 768px){
+    .loginRes{
+        display: none!important;
+        box-sizing: border-box;
+        width: 62.5%;
+    }
+}
+@media (max-width: 1000px){
+    .loginRes{
+        display:none!important;
+        width: 30%;
+    }
+    .txtJudul{
+        margin-left: 50px;
+    }
+    .button{
+        width: 100%;
+        margin-left: 20px;
+    }
+}
