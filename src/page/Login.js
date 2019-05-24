@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import { Form, Input, Button, Row, Col, DatePicker, Drawer } from 'antd';
+import { Form, Input, Button, Row, Col} from 'antd';
 import '../asset/style.css';
 import Axios from 'axios';
-const { TextArea } = Input;
-function onChange(date, dateString) {
-  console.log(date, dateString);
-}
+
 export default class Login extends Component {
   state = { visible: false };
   showDrawer = () => {
@@ -31,7 +28,7 @@ export default class Login extends Component {
     window.location.href = "#/";
   }
   login = async (event) => {
-    this.setState({loading:true});
+    this.setState({ loading: true });
     event.preventDefault();
     const body = {
 
@@ -44,42 +41,50 @@ export default class Login extends Component {
       const data = await Axios.post('https://backend-bem.herokuapp.com/auth/login', body);
       console.log(data.data);
       if (data.status) {
-        
+
         const auth = {
           authorization: 'bearer ' + data.data.token
         }
         console.log(auth)
         try {
-          await fetch('https://backend-bem.herokuapp.com/api/web/protected/cekAdmin', {
+          await fetch('https://backend-bem.herokuapp.com/api/web/protected/cekAdminBismit', {
             method: "POST",
             headers: {
-              'Content-Type' : 'application/json',
-              'authorization' : 'bearer ' + data.data.token
+              'Content-Type': 'application/json',
+              'authorization': 'bearer ' + data.data.token
             },
-            body : JSON.stringify(body)
-          }).then(ress=>{
-            if(ress.ok){
+            body: JSON.stringify(body)
+          }).then(ress => {
+            if (ress.ok) {
               return ress.json();
             }
-          }).then(result=>{
-            const payload = {
-              "data" : data.data,
-              "token" : data.data.token,
-              "level" : result.value
+          }).then(result => {
+            console.log(result);
+            if (result.status === true && result.value === "1") {
+              const payload = {
+                "data": data.data,
+                "token": data.data.token,
+                "level": result.value
+              }
+              localStorage.token = JSON.stringify(payload);
+              this.setState({ loading: false });
+              window.location.href = "/";
+            } else {
+              alert('youre not admin');
+              this.setState({ loading: false });
             }
-            localStorage.token = JSON.stringify(payload);
-            this.setState({loading:false});
-            window.location.href = "/";
+
           })
 
         }
         catch{
-          this.setState({loading:false});
+          this.setState({ loading: false });
           alert('youre not admin');
         }
       }
     }
     catch{
+      this.setState({ loading: false });
       alert('nim atau password salah');
     }
 
@@ -94,7 +99,7 @@ export default class Login extends Component {
           <Col md={22} className="cardLogin">
             <Row>
               <Col md={15} className="loginRes" style={{ backgroundColor: '#f2f2f2', height: '85vh' }}>
-                 <img src="../img/logobem4.png" className="imgLogin" alt="Logo BEM"></img>
+                <img src="../img/logobem4.png" className="imgLogin" alt="Logo BEM"></img>
               </Col>
               <Col md={9} className="button" style={{ backgroundColor: '#ffffff', height: '85vh' }}>
                 <div className="txtJudul">
@@ -122,39 +127,12 @@ export default class Login extends Component {
                     <Row>
                       <Col md={1}></Col>
                       <Col md={20} className="btnLogin">
-                      {(this.state.loading===false) && (<Button htmlType="submit" type="primary" style={{ height: '45px', width: '100%' }}>Login</Button>)}
-                        
-                        {this.state.loading && (<center><img src="https://i.ibb.co/0t3vZWt/Ellipsis-1s-200px.gif" width="100px" alt="Loading..."/></center>)}
+                        {(this.state.loading === false) && (<Button htmlType="submit" type="primary" style={{ height: '45px', width: '100%' }}>Login</Button>)}
+
+                        {this.state.loading && (<center><img src="https://i.ibb.co/0t3vZWt/Ellipsis-1s-200px.gif" width="100px" alt="Loading..." /></center>)}
                       </Col>
                     </Row>
                   </Form>
-                  <Row>
-                    <Col md={1}></Col>
-                    <Col md={20} className="btnBukuTamu">
-                      <Button type="primary" onClick={this.showDrawer} style={{ height: '100%', width: '100%' }}>
-                        Buku Tamu
-                              </Button>
-                      <Drawer
-                        title="Buku Tamu"
-                        placement="right"
-                        width={500}
-                        onClose={this.onClose}
-                        visible={this.state.visible}>
-                        <Form>
-                          <Form.Item>
-                            <Row>
-                              <Input placeholder="Nama"></Input>
-                              <Input placeholder="Asal"></Input>
-                              <Input placeholder="No.HP/ ID Line"></Input>
-                              <TextArea placeholder="Keperluan" autosize={{ minRows: 2, maxRows: 6 }} />
-                              <DatePicker onChange={onChange} /><br />
-                              <Button>Submit</Button>
-                            </Row>
-                          </Form.Item>
-                        </Form>
-                      </Drawer>
-                    </Col>
-                  </Row>
                 </div>
               </Col>
             </Row>
