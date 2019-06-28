@@ -50,12 +50,16 @@
     -moz-box-shadow: 1px 16px 19px 10px rgba(133,133,133,0.31);
     box-shadow: 1px 16px 19px 10px rgba(133,133,133,0.31);
 }
+.subTitle{
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
 .txtJudul{
-    margin-top:100px;
+    margin-top:50px;
     font-family: 'Poppins', sans-serif;
     font-size: 23px;
-    text-align: left;
-    margin-left: 36px;
+    text-align: center;
+    /* margin-left: 36px; */
     font-weight: 600;
     letter-spacing: 4px;
 }
@@ -90,11 +94,10 @@
         display:none!important;
         width: 30%;
     }
-    .txtJudul{
-        margin-left: 50px;
-    }
+    /* .txtJudul{
+        margin-left: 50px; */
+    /* } */
     .button{
         width: 100%;
-        margin-left: 20px;
     }
 }
