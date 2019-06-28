@@ -17,7 +17,6 @@ export default class RekapData extends Component {
                 authorization: 'bearer ' + token.token
             }
         }).then(ress=>{
-            console.log(ress.data);
             this.setState({data:ress.data});
             this.setState({loading: false});
         })

@@ -14,13 +14,11 @@ export default class ListMitra extends Component {
     componentWillMount() {
         this.setState({ loading: true });
         Axios.get('https://backend-bem.herokuapp.com/api/web/public/getMitra').then(ress => {
-            console.log(ress.data);
             this.setState({ data: ress.data });
             this.setState({ loading: false });
         })
     }
     delete = (id) => {
-        console.log(id)
         this.setState({ loading: true });
         const body = {
             id: id

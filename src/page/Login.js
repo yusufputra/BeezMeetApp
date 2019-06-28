@@ -24,8 +24,9 @@ export default class Login extends Component {
       loading: false
     };
   }
-  redirect() {
-    window.location.reload();
+  async redirect() {
+    window.location.href = "#/";
+    await window.location.reload();
   }
   login = async event => {
     this.setState({ loading: true });
@@ -40,12 +41,7 @@ export default class Login extends Component {
         "https://backend-bem.herokuapp.com/auth/login",
         body
       );
-      console.log(data.data);
       if (data.status) {
-        const auth = {
-          authorization: "bearer " + data.data.token
-        };
-        console.log(auth);
         try {
           await fetch(
             "https://backend-bem.herokuapp.com/api/web/protected/cekAdminBismit",
@@ -64,7 +60,6 @@ export default class Login extends Component {
               }
             })
             .then(result => {
-              console.log(result);
               const payload = {
                 data: data.data,
                 token: data.data.token,

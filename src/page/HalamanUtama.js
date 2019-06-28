@@ -27,7 +27,6 @@ export default class HalamanUtama extends Component {
       });
       let link = data;
       var res = link.split("=");
-      console.log(res[1]);
       const token = JSON.parse(localStorage.token);
       const date = new Date();
       const body = {
@@ -42,14 +41,12 @@ export default class HalamanUtama extends Component {
           }
         }
       ).then(ress => {
-        console.log(ress);
         const bodydata = {
           namaMitra: ress.data.value[0].namaMitra,
           kodeMitra: ress.data.value[0].id,
           bulan: date.getMonth() + 1,
           tahun: date.getFullYear()
         };
-        console.log(bodydata);
         Axios.post(
           "https://backend-bem.herokuapp.com/api/web/protected/postData",
           bodydata,
@@ -60,8 +57,7 @@ export default class HalamanUtama extends Component {
           }
         )
           .then(ress => {
-            console.log(ress);
-            alert("Sukses Mendapatkan Merch");
+            alert("Successful!! \n Show this to merchant and get special discount for your payment");
             this.setState({
               result: "",
               loading: false
@@ -77,10 +73,7 @@ export default class HalamanUtama extends Component {
       });
     }
   };
-  onTakePhoto(dataUri) {
-    // Do stuff with the dataUri photo...
-    console.log("takePhoto");
-  }
+
   handleError = err => {
     console.error(err);
   };
@@ -111,10 +104,7 @@ export default class HalamanUtama extends Component {
               <Breadcrumb.Item>Promo</Breadcrumb.Item>
             </Breadcrumb>
             <div style={{ background: "#fff", padding: 24, minHeight: 380 }}>
-              {/* <Camera
-                                onTakePhoto={(dataUri) => { this.onTakePhoto(dataUri); }}
-                            /> */}
-                            <h3 style={{textAlign: "center"}}>Scan Here</h3>
+              <h3 style={{ textAlign: "center" }}>Scan Here</h3>
               {this.state.loading === true && (
                 <img
                   src="https://i.imgur.com/AfRTFrY.gif"
